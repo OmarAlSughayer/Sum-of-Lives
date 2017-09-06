@@ -9,7 +9,7 @@ Cells are later colored given a color based on their integer value, where closer
 
 
 ## Future Plans 
-TODO: make the GUI faster <\n>
+TODO: make the GUI faster 
 
 TODO: allow GUI to save images into gif's
 
