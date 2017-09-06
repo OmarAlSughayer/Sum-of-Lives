@@ -18,3 +18,5 @@ TODO: find more interesting patterns and analize them
 TODO: make screen adjust automatically
 
 TODO: pass everything as main arguments
+
+TODO: find a better way than commenting things out to pass a new world to main
