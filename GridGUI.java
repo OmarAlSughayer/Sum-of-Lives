@@ -3,14 +3,20 @@
 // Last modification: 08/27/2017
 import java.util.*;
 
+import java.io.File;
+import java.io.IOException;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.imageio.ImageIO;
 
 /**
 * Controller manages in instance of Processor and of GridGUI to visualize a game of SSA
@@ -21,6 +27,7 @@ public class GridGUI extends JPanel implements ActionListener {
 	public final int FRAME_LENGTH; // length of the output screen, currently always a square
 	public static Processor engine; // the processor object
 	public Timer timer; // the timer object to conrtol repainting
+	public int frameNum; // the number of the current frame
 
 	// a constructer
 	public GridGUI(Processor p, int length, int delay){
@@ -29,6 +36,7 @@ public class GridGUI extends JPanel implements ActionListener {
 		FRAME_LENGTH = length;
 		// use this object as the timer's Actionlistenr (where the ActionEvent can be found)
 		timer = new Timer(delay, this); 
+		frameNum = 0;
 	}
 	
 	// overriding the paint object 
@@ -58,9 +66,30 @@ public class GridGUI extends JPanel implements ActionListener {
 
 	// repaints the whole panel 
 	public void actionPerformed(ActionEvent e){
+		// save the previous panel
+		save();
+
 		// keep updating the window until the user interrupts (just press the goddamn x button,
 		//	I am not	making an even listener just so you can be lazy!)
 		repaint();
+	}
+
+	// saves the current panel as a .png pic
+	public void save()
+	{
+		// create a bufferedImage to draw into 
+		BufferedImage bImg = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D td = bImg.createGraphics();
+		// paint inside the 2d object
+		this.paintAll(td);
+
+		// try to save the image
+		try {
+			ImageIO.write(bImg, "png", new File("./image" + ++frameNum + ".png"));
+		} catch (IOException e) {
+			// print the error	
+			System.out.println(e);
+		}
 	}
 
 	// assigns a single, unique, RGB color to each integer, so that closer integers have

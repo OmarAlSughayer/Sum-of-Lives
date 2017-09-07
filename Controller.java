@@ -15,7 +15,7 @@ public class Controller extends Canvas {
 	// TODO: make it so that the screen adjusts size according to how many pixels there are with a min and a max
 	public static final int FRAME_LENGTH = 1000; // length of the output screen, currently always a square
 	public static final int GRID_SIZE = 250; // size of the game grid, currently always a square
-	public static final int WORLD_CHOICE = 2; // which test world is chosen
+	public static final int WORLD_CHOICE = 1; // which test world is chosen
 	public static final int DELAY = 50; // delay between each two frames  
 
 	public static void main(String[] args) throws InterruptedException{
@@ -62,7 +62,9 @@ public class Controller extends Canvas {
 				world = new Processor(grid, 4, 3, 4, 30);
 				break;  
 
-			case 2: // #02 a randomized grid with (3, 1, 999) as parameters give a whorly effect
+			////////////////////////////////////////////////////////////////////////////////////////
+			
+			case 2: // #02 a randomized grid with (3, 1, 999) as parameters, gives a whorly effect
 				world = new Processor(GRID_SIZE, GRID_SIZE, 3, 1, 999, 30);
 				break;
 		}
