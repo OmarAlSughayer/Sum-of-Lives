@@ -15,6 +15,7 @@ public class Controller extends Canvas {
 	// TODO: make it so that the screen adjusts size according to how many pixels there are with a min and a max
 	public static final int FRAME_LENGTH = 1000; // length of the output screen, currently always a square
 	public static final int GRID_SIZE = 250; // size of the game grid, currently always a square
+	public static final int WORLD_CHOICE = 2; // which test world is chosen
 
 	public static void main(String[] args) throws InterruptedException{
 		//setup the graphics frame
@@ -23,7 +24,8 @@ public class Controller extends Canvas {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Processor world = makeProcessor();
+		// choose the world you want to display
+		Processor world = makeProcessor(WORLD_CHOICE);
 
 		// set up and add the graphics component to the frame
 		GridGUI window = new GridGUI(world, FRAME_LENGTH);
@@ -37,43 +39,40 @@ public class Controller extends Canvas {
 		}
 	}
 
-	private static Processor makeProcessor(){
+	private static Processor makeProcessor(int choice){
 
 		//  You are my world
 		// New world, the door is open
 		// You are inside
 		// One step apart
-		Processor world;
+		Processor world = new Processor(GRID_SIZE, GRID_SIZE, 14, 4, 94, 23); // default vaulues (my BDay yay)
 		
 		////////////////////////////////////////////////////////////////////////////
 		// different world and tests //////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////
 
+		switch(choice){
+			case 1: // #01 a zero grid with a 2x2 matrix of 4's in the middle gives a flower effect
+				int[][] grid = new int[GRID_SIZE][GRID_SIZE];
+				// populate the grid with all zeros
+				for(int i = 0; i < GRID_SIZE; i++){
+					for(int j = 0; j < GRID_SIZE; j++){
+						grid[i][j] = 0;
+					}
+				}
 
-		// #01 a zero grid with a 2x2 matrix of 4's in the middle gives a flower effect
-		// create the test grid 
-		/*int[][] grid = new int[GRID_SIZE][GRID_SIZE];
-		for(int i = 0; i < GRID_SIZE; i++){
-			for(int j = 0; j < GRID_SIZE; j++){
-				// grid 2
-				grid[i][j] = 0;
-			}
+				// add one square of 4's in the middle
+				grid[GRID_SIZE/2][GRID_SIZE/2] = 4; grid[GRID_SIZE/2 + 1][GRID_SIZE/2] = 4;
+				grid[GRID_SIZE/2 + 1][GRID_SIZE/2 + 1] = 4; grid[GRID_SIZE/2][GRID_SIZE/2 + 1] = 4;
+		
+				world = new Processor(grid, 4, 3, 4, 30);
+				break;  
+
+			case 2: // #02 a randomized grid with (3, 1, 999) as parameters give a whorly effect
+				world = new Processor(GRID_SIZE, GRID_SIZE, 3, 1, 999, 30);
+				break;
 		}
 
-		grid[GRID_SIZE/2][GRID_SIZE/2] = 4; grid[GRID_SIZE/2 + 1][GRID_SIZE/2] = 4;
-		grid[GRID_SIZE/2 + 1][GRID_SIZE/2 + 1] = 4; grid[GRID_SIZE/2][GRID_SIZE/2 + 1] = 4;
-		
-		world = new Processor(grid, 4, 3, 4, 30);*/
-
-		////////////////////////////////////////////////////////////////////////
-
-		// #02 a randomized grid with (3, 1, 999) as parameters give a whorly effect
-		// create the processor object
-		world = new Processor(GRID_SIZE, GRID_SIZE, 3, 1, 999, 30);
-
-		///////////////////////////////////////////////////////////////////////
-
-		// #03 
 
 		return world;
 	}
