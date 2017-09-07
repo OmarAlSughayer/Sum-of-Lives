@@ -9,7 +9,6 @@ Cells are later colored given a color based on their integer value, where closer
 
 
 ## Future Plans 
-TODO: make the GUI faster 
 
 TODO: allow GUI to save images into gif's
 
@@ -18,5 +17,3 @@ TODO: find more interesting patterns and analize them
 TODO: make screen adjust automatically
 
 TODO: pass everything as main arguments
-
-TODO: find a better way than commenting things out to pass a new world to main

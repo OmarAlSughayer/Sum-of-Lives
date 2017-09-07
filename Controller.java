@@ -16,6 +16,7 @@ public class Controller extends Canvas {
 	public static final int FRAME_LENGTH = 1000; // length of the output screen, currently always a square
 	public static final int GRID_SIZE = 250; // size of the game grid, currently always a square
 	public static final int WORLD_CHOICE = 2; // which test world is chosen
+	public static final int DELAY = 50; // delay between each two frames  
 
 	public static void main(String[] args) throws InterruptedException{
 		//setup the graphics frame
@@ -28,15 +29,8 @@ public class Controller extends Canvas {
 		Processor world = makeProcessor(WORLD_CHOICE);
 
 		// set up and add the graphics component to the frame
-		GridGUI window = new GridGUI(world, FRAME_LENGTH);
+		GridGUI window = new GridGUI(world, FRAME_LENGTH, DELAY);
 		frame.add(window);
-
-		// keep updating the window until the user interrupts (just press the goddamn x button, I am not
-		//			 making an even listener just so you can be lazy!)
-		while(true){
-			Thread.sleep(500);
-			window.repaint();
-		}
 	}
 
 	private static Processor makeProcessor(int choice){
@@ -45,7 +39,7 @@ public class Controller extends Canvas {
 		// New world, the door is open
 		// You are inside
 		// One step apart
-		Processor world = new Processor(GRID_SIZE, GRID_SIZE, 14, 4, 94, 23); // default vaulues (my BDay yay)
+		Processor world = null; // default vaulue
 		
 		////////////////////////////////////////////////////////////////////////////
 		// different world and tests //////////////////////////////////////////////

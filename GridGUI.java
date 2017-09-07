@@ -1,31 +1,40 @@
 // Omar A. AlSughayer
 // Start Date: 08/27/2017 
 // Last modification: 08/27/2017
-
-import java.awt.*;
 import java.util.*;
-import java.io.*;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
 * Controller manages in instance of Processor and of GridGUI to visualize a game of SSA
 */
-public class GridGUI extends Canvas {
+public class GridGUI extends JPanel implements ActionListener {
 
 	// TODO: make it so that the screen adjusts size according to how many pixels there are
 	public final int FRAME_LENGTH; // length of the output screen, currently always a square
 	public static Processor engine; // the processor object
+	public Timer timer; // the timer object to conrtol repainting
 
 	// a constructer
-	public GridGUI(Processor p, int length){
+	public GridGUI(Processor p, int length, int delay){
 		// assign the variables
 		engine = p;
 		FRAME_LENGTH = length;
+		// use this object as the timer's Actionlistenr (where the ActionEvent can be found)
+		timer = new Timer(delay, this); 
 	}
 	
 	// overriding the paint object 
-	public void paint(Graphics g){
-		
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+
 		// compute the length of one side of a grid's square
 		int sideLength = FRAME_LENGTH / engine.getRow();
 		// advance the grid once
@@ -42,6 +51,16 @@ public class GridGUI extends Canvas {
 				g.fillRect(i*sideLength, j*sideLength, sideLength, sideLength);
 			}
 		}
+
+		// invoke the timer to wait a bit then call the actionlistener
+		timer.start();
+	}
+
+	// repaints the whole panel 
+	public void actionPerformed(ActionEvent e){
+		// keep updating the window until the user interrupts (just press the goddamn x button,
+		//	I am not	making an even listener just so you can be lazy!)
+		repaint();
 	}
 
 	// assigns a single, unique, RGB color to each integer, so that closer integers have
