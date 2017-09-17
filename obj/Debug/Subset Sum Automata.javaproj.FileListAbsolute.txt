@@ -3,3 +3,5 @@ D:\UW\Y0 - All\Projects\Java\Subset Sum Automata\Subset Sum Automata\obj\Debug\P
 D:\UW\Y0 - All\Projects\Java\Subset Sum Automata\Subset Sum Automata\obj\Debug\Subset_Sum_Automata.jar
 D:\UW\Y0 - All\Projects\Java\Subset Sum Automata\Subset Sum Automata\obj\Debug\Controller.class
 D:\UW\Y0 - All\Projects\Java\Subset Sum Automata\Subset Sum Automata\obj\Debug\GridGUI.class
+D:\UW\Y0 - All\Projects\Java\Subset Sum Automata\Subset Sum Automata\obj\Debug\GifSequenceWriter.class
+D:\UW\Y0 - All\Projects\Java\Subset Sum Automata\Subset Sum Automata\obj\Debug\Controller$1.class

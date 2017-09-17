@@ -2,9 +2,7 @@
 // Start Date: 08/27/2017 
 // Last modification: 08/27/2017
 
-import java.awt.*;
 import java.util.*;
-import java.io.*;
 
 /**
 * Processor manages an instance of the Subset Sum Automata (SSA) problem, a combination of the subset sum

@@ -1,11 +1,22 @@
 // Omar A. AlSughayer
 // Start Date: 08/27/2017 
-// Last modification: 08/27/2017
+// Last modification: 09/17/2017
 
-import java.awt.*;
 import java.util.*;
-import java.io.*;
+
+import java.awt.Canvas;
+
+import java.io.File;
+import java.io.IOException;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+
 import javax.swing.JFrame;
+import javax.imageio.stream.ImageOutputStream;
+import javax.imageio.stream.FileImageOutputStream;
+
 
 /**
 * Controller manages in instance of Processor and of GridGUI to visualize a game of SSA
@@ -15,8 +26,8 @@ public class Controller extends Canvas {
 	// TODO: make it so that the screen adjusts size according to how many pixels there are with a min and a max
 	public static final int FRAME_LENGTH = 1000; // length of the output screen, currently always a square
 	public static final int GRID_SIZE = 250; // size of the game grid, currently always a square
-	public static final int WORLD_CHOICE = 1; // which test world is chosen
-	public static final int DELAY = 50; // delay between each two frames  
+	public static final int WORLD_CHOICE = 3; // which test world is chosen
+	public static final int DELAY = 500; // delay between each two frames  
 
 	public static void main(String[] args) throws InterruptedException{
 		//setup the graphics frame
@@ -30,9 +41,48 @@ public class Controller extends Canvas {
 
 		// set up and add the graphics component to the frame
 		GridGUI window = new GridGUI(world, FRAME_LENGTH, DELAY);
+		// extract the animation that was displayed in the window once it is closed
+
 		frame.add(window);
+
+		// add an actionlistener to creat a gif of the animation after closing
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				// get the sequence of bufferedImages then save it as a gif
+				BufferedImage[] sequence = window.getSequence(); 
+				try{ creatGIF(sequence); } catch(IOException e) { System.out.println("could not create gif"); };
+			}
+		});
+	}
+	
+	// writes the sequence of buffered images passed as a gif and saves it in the current directory
+	private static void creatGIF(BufferedImage[] sequence) throws IOException {
+		// if the frame was interrupted before it starts animating then the sequence will be empty
+		if(sequence.length != 0){ 
+			// create a new BufferedOutputStream with the last argument
+			ImageOutputStream output = new FileImageOutputStream(new File("output.gif"));
+      
+			// create a gif sequence with the type of the first image, 1 second
+			// between frames, which loops continuously
+			GifSequenceWriter writer = new GifSequenceWriter(output, sequence[0].getType(), 1, false);
+      
+			// write out the images in the sequence to the output
+			for(BufferedImage frame : sequence) {
+				writer.writeToSequence(frame);
+			}
+      
+			// close everything
+			writer.close();
+			output.close();
+
+		} else {
+			System.out.println("cannot write an empty sequence");
+		}
+		
 	}
 
+	// offers multiple 'interesting' choices for Processors 
 	private static Processor makeProcessor(int choice){
 
 		//  You are my world
@@ -66,6 +116,12 @@ public class Controller extends Canvas {
 			
 			case 2: // #02 a randomized grid with (3, 1, 999) as parameters, gives a whorly effect
 				world = new Processor(GRID_SIZE, GRID_SIZE, 3, 1, 999, 30);
+				break;
+
+			////////////////////////////////////////////////////////////////////////////////////////
+			
+			case 3: // #02 a randomized grid with (2, 5, 8) as parameters, gives a siezure effect
+				world = new Processor(GRID_SIZE, GRID_SIZE, 2, 5, 8, 30);
 				break;
 		}
 

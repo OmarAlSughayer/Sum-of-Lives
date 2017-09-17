@@ -17,3 +17,7 @@ TODO: find more interesting patterns and analize them
 TODO: make screen adjust automatically
 
 TODO: pass everything as main arguments
+
+TODO: rewrite method comments with @params 
+
+TODO: add option to write numbers inside the cells

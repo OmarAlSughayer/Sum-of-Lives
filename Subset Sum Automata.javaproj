@@ -56,6 +56,9 @@
     <Compile Include="Controller.java">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GifSequenceWriter.java">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GridGUI.java">
       <SubType>Code</SubType>
     </Compile>
