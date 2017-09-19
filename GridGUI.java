@@ -1,6 +1,6 @@
 // Omar A. AlSughayer
 // Start Date: 08/27/2017 
-// Last modification: 08/27/2017
+
 import java.util.*;
 
 import java.io.File;
@@ -33,7 +33,11 @@ public class GridGUI extends JPanel implements ActionListener {
 	public int frameNum; // the number of the current frame
 	public ArrayList<BufferedImage> sequence; 
 
-	// a constructer
+	/** a constructer that uses 
+	*	@param p: the Processor object (SSA world) to be animated and displayed
+	*	@param length: length of the output screen
+	*	@param delay: the delay between frames in milliseconds, basically 1/fps
+	*/
 	public GridGUI(Processor p, int length, int delay){
 		// assign the variables
 		engine = p;
@@ -94,7 +98,12 @@ public class GridGUI extends JPanel implements ActionListener {
 		//savePNG(bImg);
 	}
 
-	// saves the current panel to the current directory as a .png pic
+	/** saves the current panel to the current directory as a .png pic
+	*	@param bImg: the bufferedImage object to be saved as a .png
+	*	@throws IOException if saving failed for any reason
+	*
+	*	@post bImg is saved into current directory as 'fram#.png'
+	*/
 	private void savePNG(BufferedImage bImg){
 		// try to save the image as a PNG
 		try {
@@ -111,8 +120,11 @@ public class GridGUI extends JPanel implements ActionListener {
 		return sequence.toArray(new BufferedImage[sequence.size()]);
 	}
 
-	// assigns a single, unique, RGB color to each integer, so that closer integers have
-	//		closer colors on a rainbow scale
+	/** assigns a single, unique, RGB color to each integer, so that closer integers have
+	*		closer colors on a rainbow scale
+	*	@param value: an integer between 0 and the maximum number in this object's Processor
+	*	@return an RGB color that corresponds to value on a rainbow scale
+	*/
 	private Color getColor(int value){
 		
 		// strap on boys lemme explaing this one
