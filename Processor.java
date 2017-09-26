@@ -20,7 +20,7 @@ public class Processor
    public final int TARGET_OFFSET; // target value for neighboring sum
    public final int REWARD; // given reward for correct sum
    public final int PENALTY; // penalty 
-   public final int MAX; // max allowed value in the grid, the minimum is always zero
+   public int MAX; // maximum value present on the grid, the minimum is always zero
 
    public static int[][] grid; 
 
@@ -79,6 +79,10 @@ public class Processor
 				// values don't go below zero, with no maximum
 				newGrid[i][j] = Math.max(grid[i][j] - PENALTY, 0);
             }
+
+			// update the value of MAX
+			if(newGrid[i][j] > MAX) 
+				MAX = newGrid[i][j];
          }
       }
 
@@ -112,7 +116,7 @@ public class Processor
       return isSubsetSum(neighbors, neighbors.length, sum);
    }
 
-	/** comment out if you want to use the slower method (god knows why)
+	/** comment in if you want to use the slower method (god knows why)
 		a recursive method to solve the subset sum problem in exponential time
 		remember that the subset sum problem is NP-Complete so a polynomial time
 		solution (most likely) doesn't exist.

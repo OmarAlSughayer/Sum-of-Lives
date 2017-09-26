@@ -25,7 +25,7 @@ public class Controller extends Canvas {
 	// TODO: make it so that the screen adjusts size according to how many pixels there are with a min and a max
 	public static final int FRAME_LENGTH = 1000; // length of the output screen, currently always a square
 	public static final int GRID_SIZE = 250; // size of the game grid, currently always a square
-	public static final int WORLD_CHOICE = 2; // which test world is chosen
+	public static final int WORLD_CHOICE = 3; // which test world is chosen
 	public static final int DELAY = 100; // delay between each two frames  
 
 	public static void main(String[] args) throws InterruptedException{
@@ -72,10 +72,9 @@ public class Controller extends Canvas {
 			// create a gif sequence with the type of the first image, 1 second
 			// between frames, which loops continuously
 			GifSequenceWriter writer = new GifSequenceWriter(output, sequence[0].getType(), 1, false);
-			int count = 0;
+
 			// write out the images in the sequence to the output
 			for(BufferedImage frame : sequence) {
-				System.out.println(count++);
 				writer.writeToSequence(frame);
 			}
       
@@ -108,19 +107,19 @@ public class Controller extends Canvas {
 
 		switch(choice){
 			case 1: // #01 a zero grid with a 2x2 matrix of 4's in the middle gives a flower effect
-				int[][] grid = new int[GRID_SIZE][GRID_SIZE];
+				int[][] grid1 = new int[GRID_SIZE][GRID_SIZE];
 				// populate the grid with all zeros
 				for(int i = 0; i < GRID_SIZE; i++){
 					for(int j = 0; j < GRID_SIZE; j++){
-						grid[i][j] = 0;
+						grid1[i][j] = 0;
 					}
 				}
 
 				// add one square of 4's in the middle
-				grid[GRID_SIZE/2][GRID_SIZE/2] = 4; grid[GRID_SIZE/2 + 1][GRID_SIZE/2] = 4;
-				grid[GRID_SIZE/2 + 1][GRID_SIZE/2 + 1] = 4; grid[GRID_SIZE/2][GRID_SIZE/2 + 1] = 4;
+				grid1[GRID_SIZE/2][GRID_SIZE/2] = 4; grid1[GRID_SIZE/2 + 1][GRID_SIZE/2] = 4;
+				grid1[GRID_SIZE/2 + 1][GRID_SIZE/2 + 1] = 4; grid1[GRID_SIZE/2][GRID_SIZE/2 + 1] = 4;
 		
-				world = new Processor(grid, 4, 3, 4, 30);
+				world = new Processor(grid1, 4, 3, 4, 30);
 				break;  
 
 			////////////////////////////////////////////////////////////////////////////////////////
@@ -133,12 +132,6 @@ public class Controller extends Canvas {
 			
 			case 3: // #03 a randomized grid with (2, 5, 8) as parameters, gives a siezure effect
 				world = new Processor(GRID_SIZE, GRID_SIZE, 2, 5, 8, 30);
-				break;
-
-			///////////////////////////////////////////////////////////////////////////////////////
-			
-			case 4: // #04
-				world = new Processor(GRID_SIZE, GRID_SIZE, 4, 3, 5, 30);
 				break;
 
 			///////////////////////////////////////////////////////////////////////////////////////
