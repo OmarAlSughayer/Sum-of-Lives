@@ -22,23 +22,14 @@ Moreover, the colorful representation functions as a new way of displaying inter
 
 Gifs displayed here are produced through this same project, but their discovery rights go to Tom Quinn, jnazario, and several other Redditors. 
 
-![alt text](https://github.com/OmarAlSughayer/Sum-of-Lives/blob/raw/master/bin/Debug/world1.gif)
+![a zero grid with a 2x2 matrix of 4's in the middle gives a flower effect
+](https://github.com/OmarAlSughayer/Sum-of-Lives/tree/master/bin/Debug/world1.gif)
 
-a zero grid with a 2x2 matrix of 4's in the middle gives a flower effect
+![a randomized grid with (3, 1, 999) as parameters, gives a whorly effect
+](https://github.com/OmarAlSughayer/Sum-of-Lives/tree/master/bin/Debug/world2.gif)
 
-![alt text](https://github.com/OmarAlSughayer/Sum-of-Lives/tree/raw/master/bin/Debug/world2.gif)
-
-a randomized grid with (3, 1, 999) as parameters, gives a whorly effect
-
-![alt text](https://github.com/OmarAlSughayer/Sum-of-Lives/tree/raw/master/bin/Debug/world3.gif)
-
-a randomized grid with (2, 5, 8) as parameters, gives a siezure effect
-
-
-
-Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
+![a randomized grid with (2, 5, 8) as parameters, gives a siezure effect
+](https://github.com/OmarAlSughayer/Sum-of-Lives/tree/master/bin/Debug/world1.gif)
 
 ## Notes 
 
